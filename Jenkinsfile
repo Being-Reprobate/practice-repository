@@ -5,8 +5,15 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'node --version'
+                sh 'nde --version'
             }
+        }
+    }
+    post{
+        failure{
+            mail to: 'srujalprajapti04@gmail.com',
+            subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+            body:"Something is wrong in the build id : ${env.BUILD_URL}"
         }
     }
 }
